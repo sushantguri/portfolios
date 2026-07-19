@@ -18,10 +18,13 @@ html {
 
 body {
   min-height: 100%;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizeSpeed;          /* faster than optimizeLegibility */
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
   overflow-x: hidden;
+  background-color: #060606;             /* solid fallback behind canvas */
+  /* Promote body to GPU compositor layer — prevents full-page repaints */
+  isolation: isolate;
 }
 
 img, picture, svg, video, canvas {
@@ -219,13 +222,16 @@ body:has(button:hover) .cursor-ring {
   overflow: hidden;
 }
 
-/* ALL sections fully transparent — 3D background visible everywhere */
+/* ALL sections fully transparent — 3D visible everywhere */
 .aj-section--dark {
   background: transparent;
+  /* Isolate this section's layout to reduce repaint area */
+  contain: layout style;
 }
-/* Panel sections: very slight dark wash for text contrast over bright 3D */
+/* Panel sections: faint wash for contrast */
 .aj-section--panel {
-  background: rgba(6,6,6,0.35);
+  background: rgba(6,6,6,0.30);
+  contain: layout style;
 }
 
 .aj-container {
@@ -235,20 +241,26 @@ body:has(button:hover) .cursor-ring {
   z-index: 2;
 }
 
-/* Subtle dark veil behind content area for legibility */
+/* Subtle dark veil behind content — using padding not inset to avoid layout reflows */
 .aj-container::before {
   content: '';
   position: absolute;
-  inset: -4rem -3rem;
+  top: -3rem;
+  left: -2.5rem;
+  right: -2.5rem;
+  bottom: -3rem;
   background: radial-gradient(
-    ellipse 85% 80% at 50% 50%,
-    rgba(6,6,6,0.72) 0%,
-    rgba(6,6,6,0.45) 55%,
+    ellipse 82% 78% at 50% 50%,
+    rgba(6,6,6,0.68) 0%,
+    rgba(6,6,6,0.38) 55%,
     transparent 100%
   );
   z-index: -1;
   pointer-events: none;
   border-radius: 2rem;
+  /* Promote to own compositor layer so it doesn't repaint every scroll */
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 /* Section label pill */
@@ -718,10 +730,17 @@ body:has(button:hover) .cursor-ring {
   display: flex;
   gap: 0.75rem;
   width: max-content;
-  animation: skill-scroll 30s linear infinite;
+  animation: skill-scroll 36s linear infinite;
+  /* GPU compositing layer for smooth marquee */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .aj-skill-track--reverse {
-  animation: skill-scroll-reverse 28s linear infinite;
+  animation: skill-scroll-reverse 34s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 .aj-skill-track:hover,
 .aj-skill-track--reverse:hover {
