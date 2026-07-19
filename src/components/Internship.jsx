@@ -1,164 +1,121 @@
-import { motion } from 'framer-motion';
-import { Briefcase, MapPin, Calendar, Globe, Cpu } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { animate, stagger } from 'animejs';
+import { Briefcase, MapPin, Calendar } from 'lucide-react';
+
+const highlights = [
+  {
+    title: 'AI & Computer Vision',
+    desc: 'Wrote inference scripts using neural networks to process real-time video streams, identifying coordinates and targets for drone navigation systems.',
+    color: '#06b6d4',
+  },
+  {
+    title: 'Drone Control Platforms',
+    desc: 'Explored drone configurations, autonomous mission programming (INAV / flight planner), and ESC tuning for precision control.',
+    color: '#ff4b4b',
+  },
+];
 
 export default function Internship() {
+  const sectionRef = useRef(null);
+  const firedRef = useRef(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const reveals = el.querySelectorAll('.aj-reveal');
+    const items   = el.querySelectorAll('.intern-item');
+    reveals.forEach(r => { r.style.opacity = '0'; r.style.transform = 'translateY(24px)'; });
+    items.forEach(i => { i.style.opacity = '0'; i.style.transform = 'translateY(16px)'; });
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !firedRef.current) {
+          firedRef.current = true;
+          animate(reveals, { opacity: [0,1], translateY: [24,0], duration: 700, ease: 'outExpo', delay: stagger(70) });
+          animate(items,   { opacity: [0,1], translateY: [16,0], duration: 600, ease: 'outExpo', delay: stagger(80, { start: 250 }) });
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section
-      id="internship"
-      style={{
-        padding: '3rem 1.5rem 6rem 1.5rem',
-        background: 'var(--bg-secondary)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1000px',
-          margin: '0 auto',
-          position: 'relative',
-          zIndex: 1,
-        }}
-      >
-        <div style={{ position: 'relative' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6 }}
-            className="glass-card"
-            style={{
-              padding: '2.5rem',
-              position: 'relative',
-              overflow: 'hidden',
-              borderLeft: '4px solid var(--clr-cyan)',
-            }}
-          >
-            {/* Glowing accent background */}
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                width: '120px',
-                height: '120px',
-                background: 'radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%)',
-                pointerEvents: 'none',
-              }}
-            />
+    <section id="internship" ref={sectionRef} className="aj-section aj-section--dark">
+      <div className="aj-container" style={{ maxWidth: '900px' }}>
+        {/* Header */}
+        <div className="aj-label aj-reveal">✦ Internship</div>
+        <h2 className="aj-heading aj-reveal">
+          Research at<br />
+          <span className="aj-heading--accent">IIT KGP.</span>
+        </h2>
 
-            {/* Header section */}
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                paddingBottom: '1.5rem',
-                marginBottom: '1.5rem',
-              }}
-            >
-              <div>
-                <span
-                  style={{
-                    fontSize: '0.8rem',
-                    fontWeight: '700',
-                    textTransform: 'uppercase',
-                    color: 'var(--accent-primary)',
-                    letterSpacing: '0.1em',
-                  }}
-                >
-                  Research Internship
-                </span>
-                <h3 style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '0.25rem' }}>
-                  AI, Robotics & Drone Development Intern
-                </h3>
-                <h4 style={{ fontSize: '1.1rem', fontWeight: '500', color: 'var(--clr-gray-300)', marginTop: '0.2rem' }}>
-                  Learner Career Council (LCC)
-                </h4>
+        {/* Main panel */}
+        <div className="aj-reveal" style={{
+          marginTop: '2rem',
+          border: '1px solid var(--line)',
+          borderRadius: 'var(--r-lg)',
+          overflow: 'hidden',
+          background: 'var(--bg-card)',
+        }}>
+          {/* Top meta bar */}
+          <div style={{
+            display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start',
+            gap: '1.5rem',
+            padding: '2rem 2.5rem',
+            borderBottom: '1px solid var(--line)',
+            borderLeft: '3px solid #06b6d4',
+          }}>
+            <div>
+              <div style={{ fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#06b6d4', marginBottom: '0.4rem' }}>
+                Research Internship
               </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.4rem',
-                  fontSize: '0.9rem',
-                  color: 'var(--text-secondary)',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Calendar size={16} style={{ color: 'var(--clr-cyan)' }} />
-                  <span>Summer Research Term</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <MapPin size={16} style={{ color: 'var(--clr-cyan)' }} />
-                  <span>IIT Kharagpur Research Park</span>
-                </div>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: '900', color: 'var(--text)', lineHeight: 1.15 }}>
+                AI, Robotics & Drone Development Intern
+              </h3>
+              <div style={{ fontSize: '0.95rem', color: 'var(--text-2)', marginTop: '0.25rem' }}>
+                Learner Career Council (LCC)
               </div>
             </div>
 
-            {/* Description details */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr',
-                gap: '1.5rem',
-              }}
-            >
-              <div>
-                <p style={{ lineHeight: '1.7', fontSize: '1.05rem', color: 'var(--clr-gray-200)' }}>
-                  During my internship at the **IIT Kharagpur Research Park**, I collaborated on 
-                  bleeding-edge AI and drone-based software platforms. My research and engineering 
-                  focus centered on combining computer vision models with real-time drone control systems 
-                  to create smart autonomous platforms.
-                </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem', color: 'var(--text-2)' }}>
+                <Calendar size={13} style={{ color: '#06b6d4' }} /> Summer Research Term
               </div>
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '1rem',
-                  marginTop: '0.5rem',
-                }}
-              >
-                <div
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid rgba(255, 255, 255, 0.05)',
-                    borderRadius: 'var(--radius-sm)',
-                    padding: '1.25rem',
-                  }}
-                >
-                  <h5 style={{ color: 'var(--accent-primary)', fontWeight: '700', fontSize: '1rem', marginBottom: '0.5rem' }}>
-                    AI & Computer Vision Integration
-                  </h5>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                    Wrote inference scripts utilizing neural networks to process real-time video streams, identifying coordinates and targets for robotics navigation systems.
-                  </p>
-                </div>
-
-                <div
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid rgba(255, 255, 255, 0.05)',
-                    borderRadius: 'var(--radius-sm)',
-                    padding: '1.25rem',
-                  }}
-                >
-                  <h5 style={{ color: 'var(--accent-primary)', fontWeight: '700', fontSize: '1rem', marginBottom: '0.5rem' }}>
-                    Drone Control Platforms
-                  </h5>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                    Explored drone configurations, autonomous mission programming (using INAV and flight planner software), and electronic speed controller tuning.
-                  </p>
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem', color: 'var(--text-2)' }}>
+                <MapPin size={13} style={{ color: '#06b6d4' }} /> IIT Kharagpur Research Park
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.82rem', color: 'var(--text-2)' }}>
+                <Briefcase size={13} style={{ color: '#06b6d4' }} /> On-site
               </div>
             </div>
-          </motion.div>
+          </div>
+
+          {/* Description */}
+          <div style={{ padding: '1.75rem 2.5rem', borderBottom: '1px solid var(--line)' }}>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text-2)', lineHeight: 1.75, maxWidth: '650px' }}>
+              Collaborated on bleeding-edge AI and drone-based software platforms at IIT Kharagpur Research Park. Research focused on combining computer vision models with real-time drone control systems to create smart autonomous aerial platforms.
+            </p>
+          </div>
+
+          {/* Highlight panels */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderTop: 'none' }}>
+            {highlights.map((h, i) => (
+              <div key={i} className="intern-item" style={{
+                padding: '1.75rem 2.5rem',
+                borderRight: i === 0 ? '1px solid var(--line)' : 'none',
+              }}>
+                <div style={{
+                  width: 32, height: 3, borderRadius: 2,
+                  background: h.color, marginBottom: '1rem',
+                }} />
+                <h4 style={{ fontSize: '0.95rem', fontWeight: '800', color: 'var(--text)', marginBottom: '0.5rem' }}>{h.title}</h4>
+                <p style={{ fontSize: '0.83rem', color: 'var(--text-2)', lineHeight: 1.65 }}>{h.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

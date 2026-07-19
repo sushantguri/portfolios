@@ -45,13 +45,13 @@ a { color: inherit; text-decoration: none; }
 :root {
   color-scheme: dark;
 
-  /* Core palette — semi-transparent so Three.js bg shows through */
-  --bg:           rgba(6,6,6,0);          /* fully transparent — Three.js canvas IS the bg */
-  --bg-panel:     rgba(8,8,8,0.78);       /* panel sections: 78% opaque */
-  --bg-card:      rgba(14,14,14,0.85);    /* cards: 85% opaque */
-  --bg-card-2:    rgba(20,20,20,0.9);
-  --line:         rgba(255,255,255,0.07);
-  --line-bright:  rgba(255,255,255,0.14);
+  /* Core palette — TRANSPARENT so Three.js 3D shows through everywhere */
+  --bg:           transparent;
+  --bg-panel:     transparent;
+  --bg-card:      rgba(8,8,8,0.70);       /* cards: just enough to read text */
+  --bg-card-2:    rgba(12,12,12,0.80);
+  --line:         rgba(255,255,255,0.08);
+  --line-bright:  rgba(255,255,255,0.16);
 
   /* Text */
   --text:         #efefef;
@@ -133,6 +133,11 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.04em;
   line-height: 1.05;
   color: var(--text);
+  /* glow so text pops over 3D scene */
+  text-shadow:
+    0 0 40px rgba(6,6,6,0.9),
+    0 0 80px rgba(6,6,6,0.7),
+    0 2px 4px rgba(0,0,0,0.8);
 }
 
 h1 { font-size: clamp(3rem, 2rem + 7vw, 7rem); }
@@ -143,6 +148,7 @@ p {
   font-size: clamp(0.95rem, 0.85rem + 0.3vw, 1.1rem);
   color: var(--text-2);
   line-height: 1.7;
+  text-shadow: 0 0 20px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.8);
 }
 
 /* Custom scrollbar */
@@ -213,15 +219,13 @@ body:has(button:hover) .cursor-ring {
   overflow: hidden;
 }
 
-/* Dark sections: very slight frosted look so 3D geometry peeks through */
+/* ALL sections fully transparent — 3D background visible everywhere */
 .aj-section--dark {
-  background: rgba(6,6,6,0.72);
-  backdrop-filter: blur(0px);
+  background: transparent;
 }
-/* Panel sections: slightly more opaque for contrast */
+/* Panel sections: very slight dark wash for text contrast over bright 3D */
 .aj-section--panel {
-  background: rgba(8,8,8,0.82);
-  backdrop-filter: blur(0px);
+  background: rgba(6,6,6,0.35);
 }
 
 .aj-container {
@@ -229,6 +233,22 @@ body:has(button:hover) .cursor-ring {
   margin: 0 auto;
   position: relative;
   z-index: 2;
+}
+
+/* Subtle dark veil behind content area for legibility */
+.aj-container::before {
+  content: '';
+  position: absolute;
+  inset: -4rem -3rem;
+  background: radial-gradient(
+    ellipse 85% 80% at 50% 50%,
+    rgba(6,6,6,0.72) 0%,
+    rgba(6,6,6,0.45) 55%,
+    transparent 100%
+  );
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 2rem;
 }
 
 /* Section label pill */
@@ -374,13 +394,14 @@ body:has(button:hover) .cursor-ring {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+  background: transparent;
 }
 
 .aj-nav--scrolled {
-  background: rgba(6,6,6,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(6,6,6,0.70);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -943,7 +964,9 @@ body:has(button:hover) .cursor-ring {
 .aj-footer {
   padding: 3rem 2rem;
   border-top: 1px solid var(--line);
-  background: var(--bg);
+  background: rgba(6,6,6,0.4);
+  position: relative;
+  z-index: 2;
 }
 .aj-footer__inner {
   max-width: 1200px;
