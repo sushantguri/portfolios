@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { animate, stagger } from 'animejs';
+import { animate, stagger, createTimeline } from 'animejs';
 
 /* ─── Code Block ────────────────────────────────────────────── */
 function CodeBlock({ code }) {
@@ -467,7 +467,7 @@ function TimelineSequenceDemo() {
     const bars = el.querySelectorAll('.playground-bar');
 
     // Create a sequenced timeline
-    const tl = animate.timeline({
+    const tl = createTimeline({
       loop: true
     });
 
