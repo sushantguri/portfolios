@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { animate, stagger, createTimeline } from 'animejs';
 import { Code2, Globe, Cpu, Navigation, Brain, Briefcase, Rocket } from 'lucide-react';
-import { StaggeredText } from './AnimationShowcase';
+import { StaggeredText } from './StaggeredText';
 
 const timelineEvents = [
   {

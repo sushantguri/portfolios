@@ -5,7 +5,7 @@
  */
 import { useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
-import { StaggeredText } from './AnimationShowcase';
+import { StaggeredText } from './StaggeredText';
 
 export default function Hero3D() {
   const labelRef    = useRef(null);

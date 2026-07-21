@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import Hero3D from './components/Hero3D';
 import About from './components/About';
 import Skills from './components/Skills';
-import AnimationShowcase from './components/AnimationShowcase';
 import Experience from './components/Experience';
 import Internship from './components/Internship';
 import Projects from './components/Projects';
@@ -74,7 +73,6 @@ export default function App() {
           <Hero3D />
           <About />
           <Skills />
-          <AnimationShowcase />
           <Experience />
           <Internship />
           <Projects />

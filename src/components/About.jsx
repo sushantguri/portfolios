@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
 import { Brain, Cpu, Bot, Plane, Eye, Code, Wifi, Settings } from 'lucide-react';
-import { StaggeredText } from './AnimationShowcase';
+import { StaggeredText } from './StaggeredText';
 
 const stats = [
   { num: 3, suffix: '+', label: 'Years Building' },

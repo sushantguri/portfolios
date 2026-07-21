@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
 import { Cpu, Plane, Zap, Users, Terminal, Layers, ZoomIn } from 'lucide-react';
-import { StaggeredText } from './AnimationShowcase';
+import { StaggeredText } from './StaggeredText';
 
 const galleryItems = [
   {
