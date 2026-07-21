@@ -81,10 +81,10 @@ export default function Hero3D() {
         {/* Title */}
         <h1 ref={titleRef} className="aj-hero__title" style={{ opacity: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           <span className="hero-line" style={{ display: 'block', opacity: 0 }}>
-            <StaggeredText text="Sushant" />
+            <StaggeredText text="Sushant" autoPlay={true} />
           </span>
           <span className="hero-line aj-hero__title-accent" style={{ display: 'block', opacity: 0 }}>
-            <StaggeredText text="Guri." />
+            <StaggeredText text="Guri." autoPlay={true} />
           </span>
         </h1>
 

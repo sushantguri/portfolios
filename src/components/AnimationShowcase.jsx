@@ -238,10 +238,10 @@ animate('.cell', {
 }
 
 /* ─── 2. Staggered Title Letters (Anime.js Logo Style) ──────── */
-export function StaggeredText({ text, accentIndex }) {
+export function StaggeredText({ text, accentIndex, autoPlay = false }) {
   const lettersRef = useRef(null);
 
-  const handleMouseEnter = () => {
+  const triggerStagger = () => {
     const el = lettersRef.current;
     if (!el) return;
     const letters = el.querySelectorAll('.stagger-char');
@@ -258,10 +258,26 @@ export function StaggeredText({ text, accentIndex }) {
     });
   };
 
+  useEffect(() => {
+    if (!autoPlay) return;
+
+    let intervalId;
+    // Initial delay so loading animations complete first, then trigger every 5s
+    const timeoutId = setTimeout(() => {
+      triggerStagger();
+      intervalId = setInterval(triggerStagger, 5000);
+    }, 2800);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [autoPlay]);
+
   return (
     <span 
       ref={lettersRef} 
-      onMouseEnter={handleMouseEnter} 
+      onMouseEnter={triggerStagger} 
       style={{ display: 'inline-flex', cursor: 'default' }}
     >
       {text.split('').map((char, i) => (
