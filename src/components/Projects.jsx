@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
 import { Activity, Navigation, Bot, Eye, Heart, Brain } from 'lucide-react';
+import { StaggeredText } from './AnimationShowcase';
 
 const projects = [
   {
@@ -103,9 +104,11 @@ export default function Projects() {
         {/* Header */}
         <div className="aj-label aj-reveal">✦ Projects</div>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', marginBottom: '3rem' }}>
-          <h2 className="aj-heading aj-reveal" style={{ marginBottom: 0 }}>
-            Selected<br />
-            <span className="aj-heading--accent">work.</span>
+          <h2 className="aj-heading aj-reveal" style={{ marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <StaggeredText text="Selected" />
+            <span className="aj-heading--accent">
+              <StaggeredText text="work." />
+            </span>
           </h2>
           <p className="aj-reveal" style={{ maxWidth: '300px', marginBottom: 0 }}>
             A mix of software, hardware, and AI projects — each solving a real problem.

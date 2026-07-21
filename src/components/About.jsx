@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
 import { Brain, Cpu, Bot, Plane, Eye, Code, Wifi, Settings } from 'lucide-react';
+import { StaggeredText } from './AnimationShowcase';
 
 const stats = [
   { num: 3, suffix: '+', label: 'Years Building' },
@@ -92,10 +93,12 @@ export default function About() {
         <div className="aj-about__grid">
           {/* Left: bio text */}
           <div>
-            <h2 className="aj-heading aj-reveal">
-              Building at the<br />
-              <span className="aj-heading--accent">intersection</span><br />
-              of bits & atoms.
+            <h2 className="aj-heading aj-reveal" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <StaggeredText text="Building at the" />
+              <span className="aj-heading--accent">
+                <StaggeredText text="intersection" />
+              </span>
+              <StaggeredText text="of bits & atoms." />
             </h2>
 
             <p className="aj-reveal" style={{ marginBottom: '1.5rem' }}>

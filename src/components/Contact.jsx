@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
 import { Send, Mail, MapPin } from 'lucide-react';
+import { StaggeredText } from './AnimationShowcase';
 
 const GithubIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -94,9 +95,11 @@ export default function Contact() {
         {/* Header */}
         <div style={{ maxWidth: '680px', marginBottom: '4rem' }}>
           <div className="aj-label aj-reveal">✦ Contact</div>
-          <h2 className="aj-heading aj-reveal">
-            Let's build<br />
-            <span className="aj-heading--accent">something.</span>
+          <h2 className="aj-heading aj-reveal" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <StaggeredText text="Let's build" />
+            <span className="aj-heading--accent">
+              <StaggeredText text="something." />
+            </span>
           </h2>
           <p className="aj-reveal" style={{ fontSize: '1.05rem' }}>
             Have a project idea, research opportunity, or just want to connect?
