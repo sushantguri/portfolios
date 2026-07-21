@@ -169,7 +169,7 @@ export default function Timeline() {
               height: '0%',
               background: 'linear-gradient(to bottom, var(--accent) 0%, var(--accent-2) 100%)',
               boxShadow: '0 0 10px var(--accent), 0 0 20px var(--accent-2)',
-              transition: 'height 0.1s linear',
+              transition: 'none',
             }}
           />
         </div>

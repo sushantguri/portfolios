@@ -55,7 +55,7 @@ export default function App() {
   }, []);
 
   return (
-    <ReactLenis root>
+    <ReactLenis root options={{ lerp: 0.15, duration: 0.8, smoothWheel: true }}>
       <div style={{ position: 'relative', width: '100%', minHeight: '100dvh', overflowX: 'hidden' }}>
 
         {/* ── z=0  Three.js fixed background canvas (covers full page) */}

@@ -153,10 +153,10 @@ export default function ThreeBackground() {
       const t = (now - startTime) / 1000;
 
       /* Smooth inputs */
-      mouse.cx = lerp(mouse.cx, mouse.tx, 0.05);
-      mouse.cy = lerp(mouse.cy, mouse.ty, 0.05);
+      mouse.cx = lerp(mouse.cx, mouse.tx, 0.10);
+      mouse.cy = lerp(mouse.cy, mouse.ty, 0.10);
       const scrollProg = pageHeight > 0 ? scrollY / pageHeight : 0;
-      smoothScroll = lerp(smoothScroll, scrollProg, 0.07);
+      smoothScroll = lerp(smoothScroll, scrollProg, 0.28);
 
       /* Camera tilt from mouse */
       camera.rotation.y = mouse.cx * 0.10;
