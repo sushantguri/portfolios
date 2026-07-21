@@ -130,6 +130,20 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Coordinate blueprint grid overlay inspired by animejs.com */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center top;
+  z-index: 1; /* lies between ThreeBackground canvas (0) and site-content (2) */
+  pointer-events: none;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
   font-weight: 900;

@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
 import { Cpu, Plane, Zap, Users, Terminal, Layers, ZoomIn } from 'lucide-react';
+import { StaggeredText } from './AnimationShowcase';
 
 const galleryItems = [
   {
@@ -132,8 +133,12 @@ export default function Gallery() {
         }}
       >
         {/* Section title */}
-        <h2 className="section-title">
-          <span>Portfolio Gallery</span>
+        <div className="aj-label">✦ Gallery</div>
+        <h2 className="aj-heading" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
+          <StaggeredText text="Portfolio" />
+          <span className="aj-heading--accent">
+            <StaggeredText text="gallery." />
+          </span>
         </h2>
 
         {/* Gallery Grid */}

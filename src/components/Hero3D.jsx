@@ -5,6 +5,7 @@
  */
 import { useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
+import { StaggeredText } from './AnimationShowcase';
 
 export default function Hero3D() {
   const labelRef    = useRef(null);
@@ -78,9 +79,13 @@ export default function Hero3D() {
         </div>
 
         {/* Title */}
-        <h1 ref={titleRef} className="aj-hero__title" style={{ opacity: 1 }}>
-          <span className="hero-line" style={{ display: 'block', opacity: 0 }}>Sushant</span>
-          <span className="hero-line aj-hero__title-accent" style={{ display: 'block', opacity: 0 }}>Guri.</span>
+        <h1 ref={titleRef} className="aj-hero__title" style={{ opacity: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <span className="hero-line" style={{ display: 'block', opacity: 0 }}>
+            <StaggeredText text="Sushant" />
+          </span>
+          <span className="hero-line aj-hero__title-accent" style={{ display: 'block', opacity: 0 }}>
+            <StaggeredText text="Guri." />
+          </span>
         </h1>
 
         {/* Subtitle */}

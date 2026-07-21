@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { animate, stagger, createTimeline } from 'animejs';
 import { Code2, Globe, Cpu, Navigation, Brain, Briefcase, Rocket } from 'lucide-react';
+import { StaggeredText } from './AnimationShowcase';
 
 const timelineEvents = [
   {
@@ -139,15 +140,19 @@ export default function Timeline() {
         }}
       >
         {/* Section title */}
-        <h2 className="section-title">
-          <span>My Roadmap</span>
+        <div className="aj-label">✦ Timeline</div>
+        <h2 className="aj-heading" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
+          <StaggeredText text="My Journey" />
+          <span className="aj-heading--accent">
+            <StaggeredText text="roadmap." />
+          </span>
         </h2>
 
         {/* Timeline Path line (Base Track) */}
         <div
           style={{
             position: 'absolute',
-            top: '200px',
+            top: '240px',
             bottom: '40px',
             left: '32px',
             width: '2px',
@@ -162,8 +167,8 @@ export default function Timeline() {
             style={{
               width: '100%',
               height: '0%',
-              background: 'linear-gradient(to bottom, var(--clr-blue) 0%, var(--clr-cyan) 100%)',
-              boxShadow: '0 0 10px var(--clr-cyan), 0 0 20px var(--clr-blue)',
+              background: 'linear-gradient(to bottom, var(--accent) 0%, var(--accent-2) 100%)',
+              boxShadow: '0 0 10px var(--accent), 0 0 20px var(--accent-2)',
               transition: 'height 0.1s linear',
             }}
           />
