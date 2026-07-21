@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { ReactLenis } from 'lenis/react';
+import 'lenis/dist/lenis.css';
 import ThreeBackground from './components/ThreeBackground';
 import Navbar from './components/Navbar';
 import Hero3D from './components/Hero3D';
@@ -54,36 +56,38 @@ export default function App() {
   }, []);
 
   return (
-    <div style={{ position: 'relative', width: '100%', minHeight: '100dvh', overflowX: 'hidden' }}>
+    <ReactLenis root>
+      <div style={{ position: 'relative', width: '100%', minHeight: '100dvh', overflowX: 'hidden' }}>
 
-      {/* ── z=0  Three.js fixed background canvas (covers full page) */}
-      <ThreeBackground />
+        {/* ── z=0  Three.js fixed background canvas (covers full page) */}
+        <ThreeBackground />
 
-      {/* ── z=9999  Custom cursor */}
-      <div ref={cursorDotRef}  className="cursor-dot"  />
-      <div ref={cursorRingRef} className="cursor-ring" />
+        {/* ── z=9999  Custom cursor */}
+        <div ref={cursorDotRef}  className="cursor-dot"  />
+        <div ref={cursorRingRef} className="cursor-ring" />
 
-      {/* ── z=100  Navigation */}
-      <Navbar />
+        {/* ── z=100  Navigation */}
+        <Navbar />
 
-      {/* ── z=2  All page content — semi-transparent so 3D shows through */}
-      <main className="site-content">
-        <Hero3D />
-        <About />
-        <Skills />
-        <AnimationShowcase />
-        <Experience />
-        <Internship />
-        <Projects />
-        <Achievements />
-        <Certifications />
-        <TechStackAnimation />
-        <Timeline />
-        <Gallery />
-        <Contact />
-      </main>
+        {/* ── z=2  All page content — semi-transparent so 3D shows through */}
+        <main className="site-content">
+          <Hero3D />
+          <About />
+          <Skills />
+          <AnimationShowcase />
+          <Experience />
+          <Internship />
+          <Projects />
+          <Achievements />
+          <Certifications />
+          <TechStackAnimation />
+          <Timeline />
+          <Gallery />
+          <Contact />
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </ReactLenis>
   );
 }
